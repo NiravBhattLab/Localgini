@@ -95,6 +95,6 @@ __________________________________________________________________________
 __________________________________________________________________________
 
 ### Acknowledgement
-* [pCoE for Network Systems Learning, Control and Evolution)](https://ioe.iitm.ac.in/project/network-systems/)
+* [pCoE for Network Systems Learning, Control and Evolution](https://ioe.iitm.ac.in/project/network-systems/)
 * [Centre for Integrative Biology and Systems medicinE](https://ibse.iitm.ac.in/)
 * [Robert Bosch Centre for Data Science and Artificial Intelligence (RBCDSAI)](https://rbcdsai.iitm.ac.in/)
