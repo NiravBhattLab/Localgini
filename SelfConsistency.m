@@ -15,7 +15,7 @@ function [JS,frac_added] = SelfConsistency(Con_gen_model,Context_model,core_rxns
 %	frac_added: Fractional contribution of reactions by MeMs
 
 %%AUTHOR
-%       Pavan Kumar S, BiSECt lab, IIT Madras
+%       Pavan Kumar S, BioSystems Engineering and control (BiSECt) lab, IIT Madras
 
 
 % Jaccard similarity between core reactions and model reactions
