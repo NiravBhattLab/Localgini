@@ -40,8 +40,7 @@ function [Models,RxnImp] = buildContextmodels(geneExpression,model,MeM,contexts,
 %       RxnImp: Reaction important scores derived for distinct MeMs by Localgini method
 
 %%AUTHOR
-%       Pavan Kumar S, BiSECt lab, IIT Madras
-
+%       Pavan Kumar S, BioSystems Engineering and control (BiSECt) lab, IIT Madras
 
 
 % Setting the default values
