@@ -12,7 +12,7 @@ function [accuracy, pvals, sgd]  = GeneEssentialityAcc(model,crispr_scores,cutof
 %       pval: pvalue returned after wilcoxon rank-sum test with H1 as essential genes have less scores than non-essential genes
 %	sgd: genes predicted to be essential
 %%AUTHOR
-%       Pavan Kumar S, BiSECt lab, IIT Madras
+%       Pavan Kumar S, BioSystems Engineering and control (BiSECt) lab, IIT Madras
 
 gene_idx = ismember(crispr_scores.genes,model.genes);
 crispr_scores.genes = crispr_scores.genes(gene_idx);
