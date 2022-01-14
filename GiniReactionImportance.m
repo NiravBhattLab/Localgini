@@ -35,7 +35,7 @@ function [RxnImp,Contexts] = GiniReactionImportance(geneExpression,model,MeM,ut,
 %          mCADRE: elements are ubiquity scores in the range of [0 1]
 
 %%AUTHOR
-%       Pavan Kumar S, BSE lab, IIT Madras
+%       Pavan Kumar S, BioSystems Engineering and control (BiSECt) lab, IIT Madras
 
 
 % Setting the default values
@@ -107,6 +107,10 @@ else
     error("error: ThS has to be one of [1,2,3]")
 end
 
+if ~isfield(model,'rxnGeneMat')
+    model=buildRxnGeneMat(model);
+end
+
 if strcmp(MeM,'FASTCORE')
     
     RxnImp = rxn_exp;
@@ -122,7 +126,9 @@ elseif strcmp(MeM,'iMAT')
 elseif strcmp(MeM,'MBA')
     
     RxnImp = rxn_exp;
-    RxnImp(rxn_exp>=0)=2; RxnImp(rxn_exp<0)=0; RxnImp(find(sum(model.rxnGeneMat,2)==0),:)=1;
+    thr = prctile(RxnImp(RxnImp>=0),50,'all');
+    RxnImp(rxn_exp>=thr)=2; RxnImp(rxn_exp<0)=0; RxnImp(find(sum(model.rxnGeneMat,2)==0),:)=0;
+    RxnImp(rxn_exp<thr & rxn_exp>=0)=1;
     RxnImp(coreRxn,:)=2;
     
 elseif strcmp(MeM,'GIMME')
