@@ -77,9 +77,9 @@ tol = 1e-4;
 filename = './';
 ```
 
-***Building context-specific models***
+***Extracting context-specific models***
 ```
-[Models,RxnImp] = buildContextmodels(geneExpression,model,MeM,contexts,ut,lt,ThS,coreRxn,filename,tol)
+[Models,RxnImp] = buildContextmodels(geneExpression,model,MeM,contexts,ut,lt,ThS,coreRxn,filename,tol);
 ```
 
 __________________________________________________________________________
