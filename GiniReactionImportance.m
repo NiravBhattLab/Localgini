@@ -84,9 +84,23 @@ if ThS==1 % thresholding at gene level
     
 elseif ThS==2 % thresholding at enzyme level
   
-    %%%%%%%%%%%% remove this %%%%%%%%%%%%%%%
-    load('rxn_exp_enz_7525_cancer.mat')
-    %%%%%%%%%%% unitl here %%%%%%%%%%%%%%
+    for i=1:numel(Contexts)
+        [enz_exp(:,i),enzymes,newparsedGPR] = geneToEnzymeExp(model_exp_value(:,i), model_exp_gene, parsedGPR); % gene to enzyme mapping
+    end
+    temp_var = enz_exp;
+    temp_var(temp_var==0)=[];    
+    LT = prctile(temp_var,lt); % lower threshold value
+    UT = prctile(temp_var,ut); % upper threshold value   
+    clear temp_var
+    Loc_Gini = ginicoeff(enz_exp); % gini coefficient based thresholding
+    Loc_Gini(Loc_Gini>=UT)=UT;Loc_Gini(Loc_Gini<=LT)=LT;
+    enz_exp = enz_exp-repmat(Loc_Gini,1,numel(Contexts));
+    enz_exp = enz_exp./std(enz_exp,[],2); % modified enzyme expression values    
+       
+    for i=1:numel(Contexts)
+        rxn_exp(:,i) = enzymeToRxnExp(enz_exp(:,i),enzymes,newparsedGPR); % enzyme to reaction mapping
+    end
+    
 elseif ThS==3 % thresholding at reaction level
     
     for i=1:numel(Contexts)
@@ -100,7 +114,7 @@ elseif ThS==3 % thresholding at reaction level
     Loc_Gini = ginicoeff(rxn_exp); % gini coefficient based thresholding
     Loc_Gini(Loc_Gini>=UT)=UT;Loc_Gini(Loc_Gini<=LT)=LT;
     rxn_exp = rxn_exp-repmat(Loc_Gini,1,numel(Contexts));
-    rxn_exp = rxn_exp./std(rxn_exp,[],2); % modified gene expression values    
+    rxn_exp = rxn_exp./std(rxn_exp,[],2); % modified reaction expression values    
         
     
 else
@@ -160,10 +174,8 @@ elseif strcmp(MeM,'mCADRE')
 else
     error("error: MeM has to be one of ['FASTCORE','iMAT','MBA','GIMME','INIT','mCADRE']")
 end
-
-
-
 end
+
 function [gcp]=ginicoeff(data)
     data_sort=sort(data,2);
     n=size(data,2);
@@ -179,11 +191,62 @@ function [gcp]=ginicoeff(data)
     end
     gcp=gcp';
 end 
-% 
-% function eny_exp = gene_to_enzyme_exp(parsedGPR)
-% 
-%     for i=1:numel(parsedGPR)
-%         current_rxn = parsedGPR{i}
-%         if isempty(current_rxn{1})
-%             new_parsedGPR{i}=parsedGPR{i}
-%         elseif
+
+function [enz_exp,enzymes,newparsedGPR] = geneToEnzymeExp(geneExpression, geneNames, parsedGPR)
+    enzymes=cell(0,0); % to store enzyme names
+    enz_exp=[]; % to store the expression values of enzymes
+    newparsedGPR=cell(size(parsedGPR));
+    for i=1:numel(parsedGPR)
+        current_rxn = parsedGPR{i};
+        if ~isempty(current_rxn{1})
+            newparsedGPR{i}=cell(size(current_rxn));
+            for j=1:numel(current_rxn)
+                currentArr = current_rxn{j};
+                if length(currentArr)==1
+                    newparsedGPR{i}{j}=currentArr;
+                    if sum(ismember(enzymes,currentArr{1}))<1
+                        ids = find(ismember(geneNames,currentArr{1}));
+                        if ~isempty(ids)
+                            currentExp = geneExpression(ids);
+                            enzymes=[enzymes;currentArr{1}];
+                            enz_exp=[enz_exp;currentExp];
+                        end
+                    end
+                else
+                    enz_name = strjoin(sort(currentArr),' and ');
+                    newparsedGPR{i}{j} = cellstr(enz_name);
+                    if sum(ismember(enzymes,enz_name))<1
+                        ids=find(ismember(geneNames,currentArr));
+                        if numel(ids)==numel(currentArr)
+                            enzymes=[enzymes;enz_name];
+                            currentExp = min(geneExpression(ids));
+                            enz_exp=[enz_exp;currentExp];
+                        end
+                    end
+                end
+            end  
+        else
+            newparsedGPR{i}=current_rxn;
+        end
+        
+    end   
+end
+
+function rxn_exp = enzymeToRxnExp(enz_exp,enzymes,parsedGPR)
+    rxn_exp = -1*ones(length(parsedGPR),1);
+    for i = 1:length(parsedGPR)
+        current_rxn=parsedGPR{i};
+        curArr=[];
+        for j=1:length(current_rxn)
+            if length(current_rxn{j})>=1
+                ids = find(ismember(enzymes,current_rxn{j}));
+                if ~isempty(ids) 
+                     curArr= [curArr, enz_exp(ids)]; 
+                end
+            end
+        end
+        if ~isempty(curArr)
+            rxn_exp(i)=max(curArr);
+        end
+    end
+end
