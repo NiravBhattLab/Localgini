@@ -1,6 +1,5 @@
 # Localgini
-Codes for "Localgini: A gini coefficient based thresholding algorithm to build constraint based
-context-specific metabolic models"   
+Codes for "Modelling Reliable Metabolic Phenotypes by Analysing The Context-Specific Transcriptomics Data"   
 
 Authors: Pavan Kumar S and Nirav P Bhatt 
 
@@ -8,8 +7,6 @@ Authors: Pavan Kumar S and Nirav P Bhatt
 1. MATLAB
 2. [COBRA Toolbox](http://opencobra.github.io/cobratoolbox/)
 
-### Note
-1. Gene essentiality predictions uses ```fastSLgenes.m``` from https://github.com/RamanLab/FastSL
 
 ### To get a context specific model using Localgini follow the steps below
 1. mRNA expression data has to be available as a matlab structure with fields:   
