@@ -9,6 +9,7 @@ Authors: Pavan Kumar S and Nirav P Bhatt
 
 
 ### To get a context specific model using Localgini follow the steps below
+
 1. mRNA expression data has to be available as a matlab structure with fields:   
   	.value : mRNA gene expression matrix with dimension N_genes*N_samples <br>
 	.genes : cell array with geneIDs in the same format as model.genes <br>
@@ -88,13 +89,15 @@ __________________________________________________________________________
 
 ### Description of other .m functions
 
-```GeneEssentialityAcc.m``` : To compute accuracy, pvalue and essential genes for the given context and CRISPR-CAS9 scores
-
 ```SelfConsistency.m``` : To compute Jaccard similarity betweeen core reaction list and model's reactions and fractional contibution from MeM
 
 ```GiniReactionImportance.m``` : Returns MeM specific inputs required to build context-specific models
 
 __________________________________________________________________________
+### To reproduce the results generated 
+1) Download the human GEMs [iHuman](https://github.com/SysBioChalmers/Human-GEM/tree/main/model), [Recon2.2](https://www.ebi.ac.uk/biomodels/MODEL1603150001#Overview) and [Recon3D](http://bigg.ucsd.edu/models/Recon3D) in .mat formats and store them at the folder InputData
+
+2) Download the NCI60 and HPA gene-expression data and store them at the folder InputData
 
 ### Acknowledgement
 * [Centre for Integrative Biology and Systems medicinE](https://ibse.iitm.ac.in/)
