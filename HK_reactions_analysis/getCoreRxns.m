@@ -1,19 +1,19 @@
 clear
 % loading the models
-recon22 = load('./Recon2_2'); % recon2.2 model
+recon22 = load('../InputData/Recon2_2'); % recon2.2 model
 recon22_cancer = recon22.model; % recon2.2 to for cancer
 recon22_tissue = getTissuerecon22(recon22.model); % recon2.2 to for tissue
 
-recon3d = load('./Recon3D'); % recon3d model
+recon3d = load('../InputData/Recon3D'); % recon3d model
 recon3d_cancer = recon3d.model; 
 recon3d_cancer.genes = regexprep(recon3d_cancer.genes, '_\w*', ''); % recon3d for cancer
 recon3d_tissue = getTissueRecon3d(recon3d.model);
 
-ihuman = load('./iHuman'); % iHuman model
+ihuman = load('../InputData/iHuman'); % iHuman model
 ihuman_cancer = getCancerIhuman(ihuman.model); % ihuman for cancer
 ihuman_tissue = ihuman.model; % ihuman for tissue
 %% For cancer expression data
-load('./CancerExpressionData')
+load('../InputData/CancerExpressionData')
 
 % localgini thresholding
 addpath('../Localgini')
@@ -81,7 +81,7 @@ save('core_rxns_cancer_data','LG_core_recon22','LG_core_recon3d','LG_core_ihuman
 clearvars -except recon22 recon22_cancer recon22_tissue recon3d recon3d_cancer recon3d_tissue ihuman ihuman_cancer ihuman_tissue
 
 %% For HPA data
-load('./TissueExpressionData')
+load('../InputData/TissueExpressionData')
 
 % localgini thresholding
 addpath('../Localgini')
