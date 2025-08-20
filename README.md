@@ -3,6 +3,8 @@ Codes for "Modelling Reliable Metabolic Phenotypes by Analysing The Context-Spec
 
 Authors: Pavan Kumar S and Nirav P Bhatt 
 
+# To generate a context-specific metabolic model using Localgini
+
 ### Requirements
 1. MATLAB
 2. [COBRA Toolbox](http://opencobra.github.io/cobratoolbox/)
@@ -25,12 +27,12 @@ initCobraToolbox
 
 **Loading the genome scale model**  
 ```
-model = readCbModel('.\Data\ConsRecon.mat');
+model = readCbModel('GEM.mat');
 ```
 
 **Loading gene expression data**  
 ```
-load('.\Data\geneExpression.mat');
+load('geneExpression.mat');
 ```
 
 **Choice of model extraction method (has to be anyone of ['FASTCORE','iMAT','MBA','GIMME','INIT','mCADRE'])**  
@@ -85,19 +87,38 @@ cons_mod_rxn_id = [1:numel(model.rxns)];
 [Models,RxnImp] = buildContextmodels(geneExpression,model,MeM,contexts,ut,lt,ThS,coreRxn,filename,cons_mod_rxn_id,tol);
 ```
 
-__________________________________________________________________________
-
-### Description of other .m functions
-
-```SelfConsistency.m``` : To compute Jaccard similarity betweeen core reaction list and model's reactions and fractional contibution from MeM
-
-```GiniReactionImportance.m``` : Returns MeM specific inputs required to build context-specific models
 
 __________________________________________________________________________
-### To reproduce the results generated 
-1) Download the human GEMs [iHuman](https://github.com/SysBioChalmers/Human-GEM/tree/main/model), [Recon2.2](https://www.ebi.ac.uk/biomodels/MODEL1603150001#Overview) and [Recon3D](http://bigg.ucsd.edu/models/Recon3D) in .mat formats and store them at the folder InputData
+# To reproduce the results generated 
 
-2) Download the NCI60 and HPA gene-expression data and store them at the folder InputData
+### Requirements
+
+1) Download the human GEMs [iHuman](https://github.com/SysBioChalmers/Human-GEM/tree/main/model), [Recon2.2](https://www.ebi.ac.uk/biomodels/MODEL1603150001#Overview) and [Recon3D](http://bigg.ucsd.edu/models/Recon3D) in .mat formats and store them at the folder InputData. These models has to be flux consistent models.
+
+2) Download the NCI60 and HPA gene-expression data and store them at the folder InputData. The data must be in the format as defined above.
+
+### Details of the folders
+
+1) HK_reaction_analysis
+ - To get the housekeeping reactions from the housekeeping genes for all the three GEMs.
+ - To get the core reactions for cancer cell line data and HPA data
+ - To get the count of housekeeping reactions rectified by each of the thresholding methods
+2) CSMs_construction
+ - To construct the context-spcific metabolic models using three distict thresholding methods and six different MeMs for the two gene expression datasets
+3) HK_reactions_in_models
+ - To get the fraction of housekeeping reactions rectified in each of the context-specific metabolic models built.
+4) Cancer_hallmark_gene_recovery
+ - To get the fraction of hall mark genes captured by the context-specific models
+5) Pathway_enrichment
+ - To do enrichment analysis on the core reactions derived from the three GEMs model to identify the enriched pathways
+6) SelfConsistency_analysis
+ - To do the self consistency analysis on top of the CSMs to get the fractional contribution of reactions added by the MeMs in both the gene expression data. Further to perform hypothesis test to get the pvalue on how different the distribution of fractional contribution of localgini derived models compared to the others
+7) variance_in_models
+ - To generate metabolic tasks report on the models built using three different thresholding methods
+ - To do PCA on reaction content matrix and metabolic task matrix to get the variance contribution of each of the factor in the final CSM model
+8) Visualisations
+ -  All the results generated are stored in this folder as .mat, .xlsx, or .csv formats
+ -  Python codes to get all the plots presented in the main text and supplementary text
 
 ### Acknowledgement
 * [Centre for Integrative Biology and Systems medicinE](https://ibse.iitm.ac.in/)
