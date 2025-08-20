@@ -100,25 +100,25 @@ __________________________________________________________________________
 ### Details of the folders
 
 1) HK_reaction_analysis
- - To get the housekeeping reactions from the housekeeping genes for all the three GEMs.
- - To get the core reactions for cancer cell line data and HPA data
- - To get the count of housekeeping reactions rectified by each of the thresholding methods
+	 - To get the housekeeping reactions from the housekeeping genes for all the three GEMs.
+	 - To get the core reactions for cancer cell line data and HPA data
+	 - To get the count of housekeeping reactions rectified by each of the thresholding methods
 2) CSMs_construction
- - To construct the context-spcific metabolic models using three distict thresholding methods and six different MeMs for the two gene expression datasets
+ 	- To construct the context-spcific metabolic models using three distict thresholding methods and six different MeMs for the two gene expression datasets
 3) HK_reactions_in_models
- - To get the fraction of housekeeping reactions rectified in each of the context-specific metabolic models built.
+	 - To get the fraction of housekeeping reactions rectified in each of the context-specific metabolic models built.
 4) Cancer_hallmark_gene_recovery
- - To get the fraction of hall mark genes captured by the context-specific models
+	 - To get the fraction of hall mark genes captured by the context-specific models
 5) Pathway_enrichment
- - To do enrichment analysis on the core reactions derived from the three GEMs model to identify the enriched pathways
+ 	- To do enrichment analysis on the core reactions derived from the three GEMs model to identify the enriched pathways
 6) SelfConsistency_analysis
- - To do the self consistency analysis on top of the CSMs to get the fractional contribution of reactions added by the MeMs in both the gene expression data. Further to perform hypothesis test to get the pvalue on how different the distribution of fractional contribution of localgini derived models compared to the others
+ 	- To do the self consistency analysis on top of the CSMs to get the fractional contribution of reactions added by the MeMs in both the gene expression data. Further to perform hypothesis test to get the pvalue on how different the distribution of fractional contribution of localgini derived models compared to the others
 7) variance_in_models
- - To generate metabolic tasks report on the models built using three different thresholding methods
- - To do PCA on reaction content matrix and metabolic task matrix to get the variance contribution of each of the factor in the final CSM model
+	 - To generate metabolic tasks report on the models built using three different thresholding methods
+	 - To do PCA on reaction content matrix and metabolic task matrix to get the variance contribution of each of the factor in the final CSM model
 8) Visualisations
- -  All the results generated are stored in this folder as .mat, .xlsx, or .csv formats
- -  Python codes to get all the plots presented in the main text and supplementary text
+	 -  All the results generated are stored in this folder as .mat, .xlsx, or .csv formats
+	 -  Python codes to get all the plots presented in the main text and supplementary text
 
 ### Acknowledgement
 * [Centre for Integrative Biology and Systems medicinE](https://ibse.iitm.ac.in/)
