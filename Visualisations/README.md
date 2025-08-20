@@ -8,3 +8,5 @@
 6) pathway_tissue_pairs_recon22.ipynb: To create a plot that details the pathways that are enriched in the core reactions derived from Recon2.2 model and distinct thresholding methods (Figure S7 in supplementary text).
 7) pathway_tissue_pairs_recon3d.ipynb: To create a plot that details the pathways that are enriched in the core reactions derived from Recon3D model and distinct thresholding methods (Figure S8 in supplementary text).
 8) pathway_tissue_pairs_ihuman.ipynb: To create a plot that details the pathways that are enriched in the core reactions derived from Human1 model and distinct thresholding methods (Figure S9 in supplementary text).
+9) pca_mem_variance.m: To plot a bar chart that describes the source of variance in the models built. (Figure 4 and 5 in main text)
+10) JC_bw_models.ipynb: Plot of distribution of jaccard similarity between the models build from the same gene expression data. (Figures S10 and S11 in supplementary text).
