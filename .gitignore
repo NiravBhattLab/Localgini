@@ -2,6 +2,6 @@ InputData/*
 !InputData
 CSMs_construction/CancerCellLines/csm_models/*
 CSMs_construction/HPA/csm_models/*
-!CSMs_construction/CancerCellLines/csm_models/*/
-!CSMs_construction/HPA/csm_models/*/
+!CSMs_construction/CancerCellLines/csm_models/**/
+!CSMs_construction/HPA/csm_models/**/
 HK_localgini_distinct_thresholds
